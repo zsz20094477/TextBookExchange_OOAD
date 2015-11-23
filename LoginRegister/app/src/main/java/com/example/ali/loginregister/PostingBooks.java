@@ -17,6 +17,7 @@ public class PostingBooks extends AppCompatActivity implements View.OnClickListe
 
     Button Post;
     EditText txt_title,txt_author,txt_description,txt_price,txt_email,txt_phone;
+    String owner_name,title,author,description,price,owner_email,owner_phone;
 
 
 
@@ -45,8 +46,20 @@ public class PostingBooks extends AppCompatActivity implements View.OnClickListe
 
         if(v.getId() == R.id.button) {
             Toast.makeText(PostingBooks.this, "Submitting", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, Db_connection.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, Db_connection.class);
+            //startActivity(intent);
+            owner_name = "Shuzhe";
+            title = txt_title.getText().toString();
+            author = txt_author.getText().toString();
+            description = txt_description.getText().toString();
+            price = txt_price.getText().toString();
+            owner_email = txt_email.getText().toString();
+            owner_phone = txt_phone.getText().toString();
+
+
+            Book book = new Book("Shuzhe",title,author,description,price
+                    ,owner_email,owner_phone);
+            book.addBook();
         }
 
     }

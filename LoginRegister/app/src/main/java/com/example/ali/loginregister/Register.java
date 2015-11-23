@@ -39,7 +39,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                User registeredData = new User(name, username, email, password);
+                User new_user = new User(name, username, password, email);
+                new_user.addUser();
                 break;
         }
     }
