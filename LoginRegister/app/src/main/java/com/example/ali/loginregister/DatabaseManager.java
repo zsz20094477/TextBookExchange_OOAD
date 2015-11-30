@@ -166,7 +166,18 @@ public class DatabaseManager {
 
     }
 
+           public String searchBook(String searchBook)
+           {
+            //This fn. is receiving the book's name that user entered.
+               // U need to search the book in the database and return the book's title and the price.
 
+               return null;
+           }
 
+public void deleteEntry(String book1)
+{
+    // This function is receiving the book's title that the user bought from the Reservation Manager Activity.
+    //This function would delete the corresponding entry from the database.
+}
 
 }
