@@ -21,17 +21,18 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.StringTokenizer;
+
 public class SearchActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener {
 
 
     private RelativeLayout searchLayout;
     private ListView list;
-    private Button search;
-    private Button addentry;
-    private Button deleteEntry;
+    private String price;
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter arrayAdapter;
     private Button b2;
+   private String search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +42,9 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         TextView textView4 = (TextView) findViewById(R.id.textView4);
         TextView textView5 = (TextView) findViewById(R.id.textView5);
         TextView textView6 = (TextView) findViewById(R.id.textView6);
-        b2 = (Button)findViewById(R.id.button2);
+      //  b2 = (Button)findViewById(R.id.button2);
         Button add = (Button) findViewById(R.id.button3);
-        Button search = (Button) findViewById(R.id.button6);
+        Button sear = (Button) findViewById(R.id.button2);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line);
         arrayAdapter.add("Design and Analysis of Algorithm");
@@ -57,7 +58,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         autoCompleteTextView.setAdapter(arrayAdapter);
         add.setOnClickListener(this);
         b2.setOnClickListener(this);
-        search.setOnClickListener(this);
+        sear.setOnClickListener(this);
     }
 
     @Override
@@ -72,21 +73,25 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button3) {
-            Intent i1 = new Intent(SearchActivity.this, NewPostActivity.class);
+            Intent i1 = new Intent(SearchActivity.this, PostingBooks.class);
             startActivity(i1);
         }
 else if(v.getId()==R.id.button2)
         {
-            Searchmanager sm = new Searchmanager(autoCompleteTextView.getText().toString());
+            search = autoCompleteTextView.getText().toString();
+            Searchmanager sm = new Searchmanager(search);
            sm.searchResult();
             String str = sm.getResult();
-            if(str==null)
-                Toast.makeText(getApplicationContext(),"Book is out of stock",Toast.LENGTH_SHORT).show();
-        else
+            String st[] = str.split(",");
+            if(st[0].equals(null))
+                Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
+        else {
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-            intent.putExtra("Book",str);
-            startActivity(intent);
-        }
+                intent.putExtra("Book", st[0]);
+                intent.putExtra("Price",st[1]);
+                startActivity(intent);
+            }
+            }
 
 
     }
@@ -94,6 +99,7 @@ else if(v.getId()==R.id.button2)
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getApplicationContext(),"Press Search Button to search" + arrayAdapter.getItem(position),Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
