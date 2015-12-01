@@ -1,9 +1,20 @@
 package com.example.ali.loginregister;
 
+
+import java.io.Serializable;
+
 /**
  * Created by zhangshuzhe on 11/16/15.
  */
-public class Book {
+public class Book implements Serializable {
+    public String getOwner_name() {
+        return owner_name;
+    }
+
+    public void setOwner_name(String owner_name) {
+        this.owner_name = owner_name;
+    }
+
     private String owner_name;
     private String title;
     private String author;
@@ -21,6 +32,7 @@ public class Book {
         owner_Email = Owner_Email;
         owner_Phone = Owner_Phone;
     }
+
 
     public boolean addBook(){
         DatabaseManager DbMan = DatabaseManager.getInstance();

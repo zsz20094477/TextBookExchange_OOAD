@@ -2,6 +2,7 @@ package com.example.ali.loginregister;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -21,6 +22,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class SearchActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener {
@@ -32,7 +34,9 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter arrayAdapter;
     private Button b2;
-   private String search;
+    private String search;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +46,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         TextView textView4 = (TextView) findViewById(R.id.textView4);
         TextView textView5 = (TextView) findViewById(R.id.textView5);
         TextView textView6 = (TextView) findViewById(R.id.textView6);
-      //  b2 = (Button)findViewById(R.id.button2);
+        b2 = (Button)findViewById(R.id.button2);
         Button add = (Button) findViewById(R.id.button3);
         Button sear = (Button) findViewById(R.id.button2);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
@@ -76,19 +80,20 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             Intent i1 = new Intent(SearchActivity.this, PostingBooks.class);
             startActivity(i1);
         }
-else if(v.getId()==R.id.button2)
+        else if(v.getId()==R.id.button2)
         {
             search = autoCompleteTextView.getText().toString();
-            Searchmanager sm = new Searchmanager(search);
-           sm.searchResult();
-            String str = sm.getResult();
-            String st[] = str.split(",");
-            if(st[0].equals(null))
-                Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
+            Searchmanager sm = Searchmanager.getInstance();
+            Book[] book = new Book[10];
+            book = sm.searchResult(search);
+
+
+
+            if(book == null)
+                Toast.makeText(getApplicationContext(),"Book not found",Toast.LENGTH_SHORT).show();
         else {
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                intent.putExtra("Book", st[0]);
-                intent.putExtra("Price",st[1]);
+                intent.putExtra("book",book);
                 startActivity(intent);
             }
             }
