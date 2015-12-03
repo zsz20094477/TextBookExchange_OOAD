@@ -15,14 +15,15 @@ public class Searchmanager {
     private Searchmanager() {
     }
 
+    public Book[] searchResult(String book)
+    {
+        DatabaseManager ds = DatabaseManager.getInstance();
+        return ds.searchBook(book);
+    }
 
-public Book[] searchResult(String book)
-{
-
-DatabaseManager ds = DatabaseManager.getInstance();
-    return ds.searchBook(book);
-}
-
-
-
+    public boolean searchUser(String userName, String password)
+    {
+        DatabaseManager ds = DatabaseManager.getInstance();
+        return ds.searchUser(userName, password);
+    }
 }
