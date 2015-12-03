@@ -291,17 +291,17 @@ public class DatabaseManager {
            }
 
 
-    public boolean searchUser(String userName, String password)
+    public boolean searchUser(final String userName, final String password)
     {
 
-        String url_select = "http://john-shuzhe.byethost13.com/addUser.php";
+        String url_select = "http://john-shuzhe.byethost13.com/searchUser.php";
 
         final HttpClient httpClient = new DefaultHttpClient();
         final HttpPost httpPost = new HttpPost(url_select);
 
         final ArrayList<NameValuePair> namePaires = new ArrayList<NameValuePair>();
-        namePaires.add(new BasicNameValuePair("username", userName));
-        namePaires.add(new BasicNameValuePair("password", password));
+        namePaires.add(new BasicNameValuePair("UserName", userName));
+        namePaires.add(new BasicNameValuePair("Password", password));
 
         search_done = false;
 
@@ -360,13 +360,15 @@ public class DatabaseManager {
 
                         //get an output on the screen
                         //String id = Jasonobject.getString("id");
-                        String user_name = Jasonobject.getString("username");
-                        String pass = Jasonobject.getString("password");
-
-                        userFound = true;
-                        System.out.println("user found"+user_name);
-                        System.out.println("pwd found"+pass);
-                        search_done = true;
+                        String db_user_name = Jasonobject.getString("username");
+                        String db_pass = Jasonobject.getString("password");
+                        if(userName.equals(db_user_name) && password.equals(db_pass)){
+                            userFound = true;
+                            System.out.println("user found"+db_user_name);
+                            System.out.println("pwd found"+db_pass);
+                            search_done = true;
+                            i = Jarray.length()+1;
+                        }
                     }
 
                 } catch (Exception e) {
@@ -396,10 +398,5 @@ public void deleteEntry(String book1)
     // This function is receiving the book's title that the user bought from the Reservation Manager Activity.
     //This function would delete the corresponding entry from the database.
 }
-
-    
-
-
-
 
 }
