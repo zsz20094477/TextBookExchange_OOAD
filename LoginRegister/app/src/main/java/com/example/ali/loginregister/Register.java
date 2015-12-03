@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,31 +36,59 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        boolean errorFree = true;
+
         switch(v.getId()){
             case R.id.bRegister:
-                if(etName.getText().toString() == null){
-                    etName.setError("Please Enter Your Name");
+                if((etName.getText().toString()).equals("")){
+                    //etName.setError("Please Enter Your Name");
+                    Toast.makeText(getApplicationContext(), "Please Enter Your Name", Toast.LENGTH_SHORT).show();
                     etName.requestFocus();
+                    errorFree = false;
                 }
-                if(etUserName.getText().toString() == null){
-                    etUserName.setError("Please Enter Your User Name");
-                    etName.requestFocus();
-                }
-                if(!validatePassword(etPassword.getText().toString())){
-                    etPassword.setError("Please Enter Valid Password");
-                    etName.requestFocus();
-                } if(!validateEmail(etEmail.getText().toString())){
-                    etEmail.setError("Please Enter Valid Email");
-                    etName.requestFocus();
+                if((etUserName.getText().toString()).equals("")){
+                    //etUserName.setError("Please Enter Your User Name");
+                    Toast.makeText(getApplicationContext(), "Please Enter Your User Name", Toast.LENGTH_SHORT).show();
+                    etUserName.requestFocus();
+                    errorFree = false;
                 }
 
-                String name = etName.getText().toString();
-                String username = etUserName.getText().toString();
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+                if(!validateEmail(etEmail.getText().toString())){
+                    //etEmail.setError("Please Enter Valid Email");
+                    Toast.makeText(getApplicationContext(), "Please Enter Valid Email", Toast.LENGTH_SHORT).show();
+                    etEmail.requestFocus();
+                    errorFree = false;
+                } else if(!validateUnivEmail(etEmail.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Please Enter Colorado Email id only", Toast.LENGTH_LONG).show();
+                    etEmail.requestFocus();
+                    errorFree = false;
+                }
 
-                User new_user = new User(name, username, password, email);
-                new_user.addUser();
+                if((etPassword.getText().toString()).equals("")){
+                    //etPassword.setError("Please Enter Valid Password");
+                    Toast.makeText(getApplicationContext(), "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
+                    etPassword.requestFocus();
+                    errorFree = false;
+                } else if((etPassword.getText().toString()).length()<6){
+                    Toast.makeText(getApplicationContext(), "Password length must be at least 6 characters long", Toast.LENGTH_LONG).show();
+                    etPassword.requestFocus();
+                    errorFree = false;
+                }
+
+                if(errorFree) {
+                    Toast.makeText(getApplicationContext(), "User Successfully Registered", Toast.LENGTH_SHORT).show();
+
+                    String name = etName.getText().toString();
+                    String username = etUserName.getText().toString();
+                    String email = etEmail.getText().toString();
+                    String password = etPassword.getText().toString();
+
+                    User new_user = new User(name, username, password, email);
+                    new_user.addUser();
+
+                    startActivity(new Intent(this, Login.class));
+                }
+
                 break;
         }
     }
@@ -71,11 +101,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         return matcher.matches();
     }
-    protected boolean validatePassword(String password) {
-        if(password!=null && password.length()<10) {
+    protected boolean validateUnivEmail(String email) {
+        String[] tokens = email.split("@");
+        String emailToken = tokens[1];
+        if(emailToken.equals("colorado.edu"))
             return true;
-        } else {
+        else
             return false;
-        }
     }
 }
