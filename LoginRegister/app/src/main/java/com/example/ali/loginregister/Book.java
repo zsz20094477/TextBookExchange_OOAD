@@ -17,6 +17,31 @@ public class Book implements Serializable {
 
     private String owner_name;
     private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getOwner_Email() {
+        return owner_Email;
+    }
+
+    public String getOwner_Phone() {
+        return owner_Phone;
+    }
+
     private String author;
     private String description;
     private String price;
