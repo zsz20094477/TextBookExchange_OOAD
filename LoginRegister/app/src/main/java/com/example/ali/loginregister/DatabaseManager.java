@@ -84,7 +84,6 @@ public class DatabaseManager {
 
                     HttpResponse httpResponse = httpClient.execute(httpPost);
                     HttpEntity httpEntity = httpResponse.getEntity();
-                    System.out.println(httpEntity);
 
                     //read content
                     is =  httpEntity.getContent();
@@ -143,7 +142,6 @@ public class DatabaseManager {
 
                     HttpResponse httpResponse = httpClient.execute(httpPost);
                     HttpEntity httpEntity = httpResponse.getEntity();
-                    System.out.println(httpEntity);
 
                     //read content
                     is =  httpEntity.getContent();
@@ -206,7 +204,6 @@ public class DatabaseManager {
 
                            HttpResponse httpResponse = httpClient.execute(httpPost);
                            HttpEntity httpEntity = httpResponse.getEntity();
-                           System.out.println(httpEntity);
 
                            //read content
                            is =  httpEntity.getContent();
@@ -235,8 +232,6 @@ public class DatabaseManager {
                        }
 
                        try {
-                           System.out.println("Start: ");
-                           System.out.println(result);
                            JSONArray Jarray = new JSONArray(result);
 
                            for(int i=0;i<Jarray.length();i++) {
@@ -250,15 +245,12 @@ public class DatabaseManager {
                                String Title = Jasonobject.getString("Title");
                                String Author = Jasonobject.getString("Author");
                                String Description = Jasonobject.getString("Description");
-                               String Price = Jasonobject.getString("Price");
+                                   String Price = Jasonobject.getString("Price");
                                String Owner_Email = Jasonobject.getString("Owner_Email");
                                String Owner_Phone = Jasonobject.getString("Owner_Phone");
                                String db_detail = "";
-                               System.out.println("haha2");
                                book[i] = new Book(Owner_name, Title, Author, Description, Price, Owner_Email, Owner_Phone);
-                               System.out.println("haha3");
                                search_done = true;
-                               System.out.println(book[i].getOwner_name());
                            }
 
                        } catch (Exception e) {
@@ -279,7 +271,6 @@ public class DatabaseManager {
                    AsyncTask task = new searchBook_task().execute();
                    //task.execute();
                    task.get();
-                   System.out.println("haha4");
                }
                catch(Exception e){
 

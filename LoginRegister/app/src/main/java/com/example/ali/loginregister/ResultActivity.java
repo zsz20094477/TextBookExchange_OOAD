@@ -26,9 +26,10 @@ private String title;
         BookTitle = (TextView) resultlayout.findViewById(R.id.textBook);
         Price = (TextView) resultlayout.findViewById(R.id.textPrice);
         Bundle extras = getIntent().getExtras();
-        title = extras.getString("Book");
-    pri = extras.getString("Price");
-        BookTitle.setText(title);
+        Book[] book = (Book[]) extras.getSerializable("book");
+        System.out.println(book[0].getOwner_name());
+        BookTitle.setText(book[0].getTitle()+" "+book[0].getAuthor()+" "+book[0].getOwner_name());
+        Price.setText(book[0].getPrice());
     Price.setText(pri);
     }
 
