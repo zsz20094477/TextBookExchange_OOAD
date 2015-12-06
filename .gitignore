@@ -6,3 +6,7 @@ LoginRegister/.idea/misc.xml
 LoginRegister/.idea/vcs.xml
 
 LoginRegister/app/app.iml
+
+LoginRegister/app/build.gradle
+
+LoginRegister/app/src/main/AndroidManifest.xml
