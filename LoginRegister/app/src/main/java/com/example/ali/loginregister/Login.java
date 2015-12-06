@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,8 +33,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bLogin:
-                Intent intent = new Intent(this,SearchActivity.class);
-                startActivity(intent);
+
+                Searchmanager sm = Searchmanager.getInstance();
+                if(sm.searchUser(etUserName.getText().toString(), etPassword.getText().toString())){
+                    Intent intent = new Intent(this,SearchActivity.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(getApplicationContext(), "User Not Found. Please enter valid user details", Toast.LENGTH_LONG).show();
 
                 break;
             case R.id.bSignUp:

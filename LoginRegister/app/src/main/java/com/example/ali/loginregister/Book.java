@@ -1,11 +1,47 @@
 package com.example.ali.loginregister;
 
+
+import java.io.Serializable;
+
 /**
  * Created by zhangshuzhe on 11/16/15.
  */
-public class Book {
+public class Book implements Serializable {
+    public String getOwner_name() {
+        return owner_name;
+    }
+
+    public void setOwner_name(String owner_name) {
+        this.owner_name = owner_name;
+    }
+
     private String owner_name;
     private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getOwner_Email() {
+        return owner_Email;
+    }
+
+    public String getOwner_Phone() {
+        return owner_Phone;
+    }
+
     private String author;
     private String description;
     private String price;
@@ -21,6 +57,7 @@ public class Book {
         owner_Email = Owner_Email;
         owner_Phone = Owner_Phone;
     }
+
 
     public boolean addBook(){
         DatabaseManager DbMan = DatabaseManager.getInstance();
