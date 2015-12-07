@@ -40,8 +40,8 @@ public class ResultDetailActivity extends AppCompatActivity {
                 Book chosenBook = (Book) intent.getSerializableExtra("chosenBook");
 //                String chosenBook = intent.getStringExtra("chosenBook");
                 ((TextView) rootView.findViewById(R.id.detail_title)).setText(chosenBook.getTitle());
-                ((TextView) rootView.findViewById(R.id.detail_user)).setText(chosenBook.getOwner_name());
-                ((TextView) rootView.findViewById(R.id.detail_description)).setText(chosenBook.getDescription());
+                ((TextView) rootView.findViewById(R.id.detail_user)).setText("Seller: " + chosenBook.getOwner_name());
+                ((TextView) rootView.findViewById(R.id.detail_description)).setText("Description: " + chosenBook.getDescription());
             }
             return rootView;
         }

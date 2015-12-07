@@ -15,21 +15,37 @@
         android:layout_alignParentEnd="true">
         <TextView
             android:id="@+id/detail_title"
-            android:text=""
+            android:text="Title"
+            android:textSize="40dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/detail_user"
-            android:text=""
+            android:text="User"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"/>
 
         <TextView
             android:id="@+id/detail_description"
-            android:text=""
+            android:text="Description"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reserve"
+            android:background="#4372ff"
+            android:textColor="#FFF"
+            android:id="@+id/reserve_button"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
 </RelativeLayout>
