@@ -2,6 +2,7 @@ package com.example.ali.loginregister;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         TextView textView5 = (TextView) findViewById(R.id.textView5);
         TextView textView6 = (TextView) findViewById(R.id.textView6);
         b2 = (Button)findViewById(R.id.button2);
-        Button add = (Button) findViewById(R.id.button3);
+        FloatingActionButton add = (FloatingActionButton) findViewById(R.id.button3);
         Button sear = (Button) findViewById(R.id.button2);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line);
@@ -60,7 +61,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
-        Button add = (Button) findViewById(R.id.button3);
+        FloatingActionButton add = (FloatingActionButton) findViewById(R.id.button3);
         add.setOnClickListener(this);
 
     }
