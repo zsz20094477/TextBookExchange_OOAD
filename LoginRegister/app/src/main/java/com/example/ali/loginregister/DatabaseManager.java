@@ -442,7 +442,7 @@ public class DatabaseManager {
                         String db_user_name = Jasonobject.getString("username");
                         String db_name = Jasonobject.getString("name");
                         String db_email = Jasonobject.getString("email");
-                        thisUser = new ThisUser(db_name,db_user_name,db_email);
+                        thisUser = new ThisUser(db_name,db_user_name,db_email,"","");
                         if(thisUser!=null){
                             userFound = true;
                         }
