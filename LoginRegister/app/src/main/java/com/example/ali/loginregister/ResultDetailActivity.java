@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class ResultDetailActivity extends AppCompatActivity {
+public class ResultDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static Book chosenBook;
+    public Button reserve_button;
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,8 @@ public class ResultDetailActivity extends AppCompatActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+    reserve_button = (Button) findViewById(R.id.reserve_button);
+    reserve_button.setOnClickListener(this);
     }
 
 
@@ -27,7 +32,6 @@ public class ResultDetailActivity extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-
         public PlaceholderFragment() {
         }
 
@@ -37,13 +41,21 @@ public class ResultDetailActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_result_detail, container, false);
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra("chosenBook")) {
-                Book chosenBook = (Book) intent.getSerializableExtra("chosenBook");
+                chosenBook = (Book) intent.getSerializableExtra("chosenBook");
 //                String chosenBook = intent.getStringExtra("chosenBook");
                 ((TextView) rootView.findViewById(R.id.detail_title)).setText(chosenBook.getTitle());
                 ((TextView) rootView.findViewById(R.id.detail_user)).setText("Seller: " + chosenBook.getOwner_name());
                 ((TextView) rootView.findViewById(R.id.detail_description)).setText("Description: " + chosenBook.getDescription());
             }
             return rootView;
+        }
+
+    }
+
+    public void onClick(View v) {
+        if(v.getId()==R.id.reserve_button){
+            ReservationManager RM = ReservationManager.getInstance();
+            RM.Reserve(chosenBook,ThisUser.username);
         }
     }
 }
