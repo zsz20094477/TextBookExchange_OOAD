@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ResultDetailActivity extends AppCompatActivity{
 
@@ -48,6 +49,9 @@ public class ResultDetailActivity extends AppCompatActivity{
                         case R.id.reserve_button:
                             ReservationManager RM = ReservationManager.getInstance();
                             RM.Reserve(chosenBook);
+                            Toast.makeText(getActivity(), "Reserved", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(), SearchActivity.class);
+                            startActivity(intent);
                             break;
                     }
                 }

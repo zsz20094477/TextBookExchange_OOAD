@@ -532,7 +532,11 @@ public class DatabaseManager {
 
             }
         }
-        new reserve_task().execute();
+        try {
+            AsyncTask task = new reserve_task().execute();
+            task.get();
+        }
+        catch(Exception e){}
         return true;
 
     }
