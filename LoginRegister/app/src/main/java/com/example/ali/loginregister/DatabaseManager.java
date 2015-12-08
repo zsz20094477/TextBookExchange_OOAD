@@ -112,6 +112,9 @@ public class DatabaseManager {
         namePaires.add(new BasicNameValuePair("username", username));
         namePaires.add(new BasicNameValuePair("password", password));
         namePaires.add(new BasicNameValuePair("email", email));
+        namePaires.add(new BasicNameValuePair("ReservedBook1", ""));
+        namePaires.add(new BasicNameValuePair("ReservedBook2", ""));
+
 
 
         class addUser_task extends AsyncTask<String, String, Void>
@@ -385,7 +388,7 @@ public class DatabaseManager {
 
         search_done = false;
 
-        class searchUser_task extends AsyncTask<String, String, Void>
+        class getUser_task extends AsyncTask<String, String, Void>
         {
             InputStream is = null ;
             String result = "";
@@ -442,7 +445,9 @@ public class DatabaseManager {
                         String db_user_name = Jasonobject.getString("username");
                         String db_name = Jasonobject.getString("name");
                         String db_email = Jasonobject.getString("email");
-                        thisUser = new ThisUser(db_name,db_user_name,db_email,"","");
+                        String db_reB1 = Jasonobject.getString("ReservedBook1");
+                        String db_reB2 = Jasonobject.getString("ReservedBook2");
+                        thisUser = new ThisUser(db_name,db_user_name,db_email,db_reB1,db_reB2);
                         if(thisUser!=null){
                             userFound = true;
                         }
@@ -460,7 +465,7 @@ public class DatabaseManager {
             }
         }
         try {
-            AsyncTask task = new searchUser_task().execute();
+            AsyncTask task = new getUser_task().execute();
             //task.execute();
             task.get();
         }
@@ -469,6 +474,69 @@ public class DatabaseManager {
         }
         return userFound;
     }
+
+
+
+
+
+
+
+    public boolean ReserveBook(Book chosenbook) {
+        String url_select = "http://john-shuzhe.byethost13.com/Reserve.php";
+        //final URL url = new URL("http://john-shuzhe.byethost13.com/demo.php");
+
+        final HttpClient httpClient = new DefaultHttpClient();
+        final HttpPost httpPost = new HttpPost(url_select);
+
+        final ArrayList<NameValuePair> namePaires = new ArrayList<NameValuePair>();
+        namePaires.add(new BasicNameValuePair("Title", chosenbook.getTitle()));
+        namePaires.add(new BasicNameValuePair("username", ThisUser.username));
+
+
+
+
+        class getUser_task extends AsyncTask<String, String, Void>
+        {
+            InputStream is = null ;
+            String result = "";
+            protected void onPreExecute() {
+
+            }
+            @Override
+            protected Void doInBackground(String... params) {
+
+                try {
+                    httpPost.setEntity(new UrlEncodedFormEntity(namePaires));
+
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+
+                    //read content
+                    is =  httpEntity.getContent();
+
+
+                } catch (Exception e) {
+
+                    Log.e("log_tag", "Error in http connection " + e.toString());
+                    //Toast.makeText(MainActivity.this, "Please Try Again", Toast.LENGTH_LONG).show();
+                }
+
+
+                return null;
+
+            }
+            protected void onPostExecute(Void v) {
+
+                // ambil data dari Json database
+
+            }
+        }
+        System.out.println("haha");
+        new getUser_task().execute();
+        return true;
+
+    }
+
 
 
 
