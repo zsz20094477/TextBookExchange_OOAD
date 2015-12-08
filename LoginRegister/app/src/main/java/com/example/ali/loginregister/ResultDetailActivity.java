@@ -50,10 +50,7 @@ public class ResultDetailActivity extends AppCompatActivity{
                         case R.id.reserve_button:
                             ReservationManager RM = ReservationManager.getInstance();
                             RM.Reserve(chosenBook);
-
-                            Toast.makeText(getActivity(), "Reserved", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), SearchActivity.class);
-                            startActivity(intent);
+                            
 
                             Toast.makeText(getActivity(), "Book Reserved", Toast.LENGTH_LONG).show();
                             ((TextView) getActivity().findViewById(R.id.reserve_status)).setText("You have reserved this book, you can contact seller by email: "
