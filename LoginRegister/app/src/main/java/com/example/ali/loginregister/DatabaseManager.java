@@ -495,7 +495,7 @@ public class DatabaseManager {
 
 
 
-        class getUser_task extends AsyncTask<String, String, Void>
+        class reserve_task extends AsyncTask<String, String, Void>
         {
             InputStream is = null ;
             String result = "";
@@ -528,11 +528,11 @@ public class DatabaseManager {
             protected void onPostExecute(Void v) {
 
                 // ambil data dari Json database
+                getUser(ThisUser.username);
 
             }
         }
-        System.out.println("haha");
-        new getUser_task().execute();
+        new reserve_task().execute();
         return true;
 
     }
