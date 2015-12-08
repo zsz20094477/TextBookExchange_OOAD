@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ResultDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ResultDetailActivity extends AppCompatActivity{
 
     public static Book chosenBook;
-    public Button reserve_button;
+
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +23,8 @@ public class ResultDetailActivity extends AppCompatActivity implements View.OnCl
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-    reserve_button = (Button) findViewById(R.id.reserve_button);
-    reserve_button.setOnClickListener(this);
+
+
     }
 
 
@@ -39,7 +39,19 @@ public class ResultDetailActivity extends AppCompatActivity implements View.OnCl
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_result_detail, container, false);
+            Button reserve_button = (Button)rootView.findViewById(R.id.reserve_button);
             Intent intent = getActivity().getIntent();
+            final View.OnClickListener Click = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.reserve_button:
+                            ReservationManager RM = ReservationManager.getInstance();
+                            RM.Reserve(chosenBook);
+                            break;
+                    }
+                }
+            };
             if (intent != null && intent.hasExtra("chosenBook")) {
                 chosenBook = (Book) intent.getSerializableExtra("chosenBook");
 //                String chosenBook = intent.getStringExtra("chosenBook");
@@ -47,15 +59,11 @@ public class ResultDetailActivity extends AppCompatActivity implements View.OnCl
                 ((TextView) rootView.findViewById(R.id.detail_user)).setText("Seller: " + chosenBook.getOwner_name());
                 ((TextView) rootView.findViewById(R.id.detail_description)).setText("Description: " + chosenBook.getDescription());
             }
+            reserve_button.setOnClickListener(Click);
             return rootView;
         }
 
     }
 
-    public void onClick(View v) {
-        if(v.getId()==R.id.reserve_button){
-            ReservationManager RM = ReservationManager.getInstance();
-            RM.Reserve(chosenBook,ThisUser.username);
-        }
-    }
+
 }

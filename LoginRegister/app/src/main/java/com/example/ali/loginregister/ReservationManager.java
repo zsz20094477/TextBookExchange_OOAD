@@ -14,10 +14,10 @@ public class ReservationManager {
     private ReservationManager() {
     }
 
-       public static void Reserve(Book book, String UserName)
+       public static void Reserve(Book book)
        {
            DatabaseManager dm = DatabaseManager.getInstance();
-           //dm.deleteEntry(title);
+           dm.ReserveBook(book);
        }
 
 }
