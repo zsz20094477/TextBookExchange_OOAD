@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="90dp"
         android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +29,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="You don't have any reserved book"
             android:textSize="20dp"
             android:id="@+id/textView3"
@@ -37,7 +37,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text=""
             android:textSize = "20dp"
             android:textColor="@color/text"
@@ -45,7 +45,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text=""
             android:textSize="20dp"
             android:textColor="@color/text"
@@ -53,7 +53,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text=""
             android:textSize="20dp"
             android:textColor="@color/text"
@@ -83,6 +83,7 @@
         android:id="@+id/autoCompleteTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
         android:layout_alignParentTop="true" />
 
     <Button
@@ -95,5 +96,19 @@
         android:layout_alignBottom="@+id/autoCompleteTextView"
         android:layout_alignRight="@+id/autoCompleteTextView"
         />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:background="#00000000"
+        android:textColor="#fff"
+        android:text="LOG OUT"
+        android:layout_height="wrap_content"
+        android:id="@+id/logout_button"
+        android:layout_alignBottom="@+id/autoCompleteTextView"
+        android:layout_marginBottom="60dp"
+        android:layout_alignRight="@+id/autoCompleteTextView"
+        />
+
 
 </RelativeLayout>

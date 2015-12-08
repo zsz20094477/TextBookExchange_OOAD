@@ -58,6 +58,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         add.setOnClickListener(this);
         b2.setOnClickListener(this);
         sear.setOnClickListener(this);
+        ((Button)findViewById(R.id.logout_button)).setOnClickListener(this);
     }
 
     @Override
@@ -84,9 +85,6 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             Searchmanager sm = Searchmanager.getInstance();
             List<Book> book = new ArrayList<Book>();
             book = sm.searchResult(search);
-
-
-
             if(book == null)
                 Toast.makeText(getApplicationContext(),"Book not found",Toast.LENGTH_SHORT).show();
         else {
@@ -96,7 +94,13 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
                 intent.putExtra("book",bookArray);
                 startActivity(intent);
             }
-            }
+        }
+        else if(v.getId() ==R.id.logout_button){
+            MainActivity.userLocalStore.clearUserData();
+            MainActivity.userLocalStore.setUserLoggedIn(false);
+            startActivity(new Intent(this, Login.class));
+        }
+
 
 
     }
