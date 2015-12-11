@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/detail_title"
             android:text="Title"
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>

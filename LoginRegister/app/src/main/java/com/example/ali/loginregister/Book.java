@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by zhangshuzhe on 11/16/15.
  */
-public class Book extends schoolRalatedItem implements Serializable {
+public class Book implements Serializable {
 
     private String owner_name;
     private String title;
@@ -77,10 +77,6 @@ public class Book extends schoolRalatedItem implements Serializable {
         owner_Phone = Owner_Phone;
     }
 
-    public void post(){
-        addBook();
-    }
-    public void delete(){
 
     }
     public boolean addBook(){
